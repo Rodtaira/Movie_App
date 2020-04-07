@@ -9,7 +9,6 @@ module.exports = {
   host: process.env.DB_HOST,
   dialect: process.env.DB_DIALECT || 'postgres',
   storage: './__tests__/database.sqlite',
-  operatorsAliases: false, 
   logging: false, 
   define: {
     timestamp: true, 

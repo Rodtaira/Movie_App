@@ -10,19 +10,46 @@ describe('Authentication', () => {
 
     it('should authenticate with valid credentials', async () => {
         const user = await User.create({
-            name: 'Malu', 
-            email: 'malu@moga.com.br', 
-            password: 'popo123'
+            name: 'Luna', 
+            email: 'luna@katrina.com.br', 
+            password: 'luna123'
         })
 
+     
+        test_user = {
+            email: 'luna@katrina.com.br',
+            password: 'luna123'
+        }
+
+        const response = await request(app)
+            .post('/sessions')
+            .send(test_user)
+
+        expect(response.status).toBe(200)
+    })
+
+    it('should not authenticate with invalid credentials', async () => {
+        const user = await User.create({
+            name: "Luna", 
+            email: "luna@katrina.com.br", 
+            password: "luna123"
+        })
+
+    
         const response = await request(app)
             .post('/sessions')
             .send({
                 email: user.email, 
-                password: 'popo123'
+                password: "luna1234"
             })
-        //console.log(response.status)
-        expect(response.status).toBe(200)
+
+            expect(response.status).toBe(401)
     })
+
+    // it('should return jwt token when authenticated', async () => {
+
+    // }
+
+
 })
 
